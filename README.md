@@ -22,11 +22,9 @@ To protect API_KEY, script uses env variable.
 To setup just create `.env` with the API_KEY variable inside. `.env.example` can be used as a template.  
 
 The script is usable with 3 CLI parameters:  
-`
--d --destination_path, type=str, default="scraped_french_books.csv")  
--p --number_of_pages, type=int, default=20)  
--l --log_file, type=str, default='amazon_scraping.log')
-`     
+`-d --destination_path, type=str, default="scraped_french_books.csv")`  
+`-p --number_of_pages, type=int, default=20)`  
+`-l --log_file, type=str, default='amazon_scraping.log')` 
 
 Default number of pages is 20 but can be modified. I tested up to 1000 scraped pages and processed books with additional info successfully in 340s~ even tho the upper limit with the given link seems to be 1200 books, which is less than 100 pages at 16 books per page)
 Logs are printed in console and in `log_file`
