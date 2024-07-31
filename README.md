@@ -30,13 +30,17 @@ The script is usable with 3 CLI parameters:
 ]. Results will be present by default `scraped_french_books.csv` or any other `destination_path` given  
 ]. Logs are printed in console and in `log_file`  
 
-]. I tested up to 1000 scraped pages and processed books with additional info successfully in 340s~.but it seems to be pointless going over 100 since the upper limit with the given link seems to be 1200 books, which is less than 100 pages at 16 books per page  
 
 `python3 book_scraping.py -p 30 -d "book_scraping.csv" -l "book_scraping.log`  
 
 all args have defaults so `python3 book_scraping.py` is perfectly fine as well  
 
-Essay about scoring is `scoring.txt`  
+I tested up to 1000 pages with additional books info fetched successfully in 340s~ but it's pointless going over 75 (n° of pages on amazon) since the upper limit with the given link is 16*75 = 1200 books.
+
+
+## Scoring results
+
+Essay about scoring can be found in `scoring.txt`  
 
 
 ## Demo of fully async approach
