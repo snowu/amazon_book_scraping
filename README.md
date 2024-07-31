@@ -31,7 +31,7 @@ The script is usable with 3 CLI parameters:
 ]. Logs are printed in console and in `log_file`  
 
 
-`python3 book_scraping.py -p 30 -d "book_scraping.csv" -l "book_scraping.log`  
+`python3 book_scraping.py -p 20 -d "book_scraping.csv" -l "book_scraping.log`  
 
 all args have defaults so `python3 book_scraping.py` is perfectly fine as well  
 
@@ -45,7 +45,7 @@ Essay about scoring can be found in `scoring.txt`
 
 ## Demo of fully async approach
 
-There's also available the version of the script (for demonstrative purposes) using a comlete async approach but as mentioned above, data is incorrect.  
+There's also available the version of the approach I would have used if I didn't encounter the problem where as mentioned above, data is incorrect when fetching async jobs.  
 Full async version is available in `fully_async.py`, usage is identical to `book_scraping.py` 
 
-`python3 fully_async.py -p 30 -d "book_scraping_async.csv" -l "book_scraping_async.log`
+`python3 fully_async.py -p 20 -d "book_scraping_async.csv" -l "book_scraping_async.log`
