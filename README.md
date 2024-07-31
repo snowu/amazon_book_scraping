@@ -26,9 +26,10 @@ The script is usable with 3 CLI parameters:
 `-p --number_of_pages, type=int, default=20)`  
 `-l --log_file, type=str, default='amazon_scraping.log')` 
 
-Default number of pages is 20 but can be modified. I tested up to 1000 scraped pages and processed books with additional info successfully in 340s~ even tho the upper limit with the given link seems to be 1200 books, which is less than 100 pages at 16 books per page)
-Logs are printed in console and in `log_file`
-Results will be present by default `scraped_french_books.csv` or any other `destination_path` given
+Default number of pages is 20 but can be modified.  
+I tested up to 1000 scraped pages and processed books with additional info successfully in 340s~ even tho the upper limit with the given link seems to be 1200 books, which is less than 100 pages at 16 books per page)  
+Logs are printed in console and in `log_file`  
+Results will be present by default `scraped_french_books.csv` or any other `destination_path` given  
 
 `python3 book_scraping.py -p 30 -d "book_scraping.csv" -l "book_scraping.log`
 
