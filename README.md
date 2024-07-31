@@ -16,18 +16,18 @@ For this reason, I ended up using a mixture of sync, asyncio and threading:
 Good news is, this "mixed" approach seems to be both faster and more precise than a fully async approach using ScraperAPI async features. So win win, I suppose.  
 
 ## Run the script
-Final script is `book_scraping.py`.   
-To protect API_KEY, script uses env variable.  
-To setup just create `.env` with the API_KEY variable inside. `.env.example` can be used as a template.  
+Final script is `book_scraping.py`.  
+To protect ScraperAPI key the script uses env variable:   
+]. To setup just create `.env` with the API_KEY = "ACTUAL_API_KEY" variable inside. `.env.example` can be used as a template.  
 
 The script is usable with 3 CLI parameters:  
-`-d --destination_path, type=str, default="scraped_french_books.csv")`  
-`-p --number_of_pages, type=int, default=20)`  
-`-l --log_file, type=str, default='amazon_scraping.log')` 
+`-d --destination_path`  
+`-p --number_of_pages`  
+`-l --log_file`  
 
-]. Default `number_of_pages` is 20 but can be modified.  
-]. Results will be present by default `scraped_french_books.csv` or any other `destination_path` given  
-]. Logs are printed in console and in `log_file`  
+]. Default `number_of_pages` is 20.  
+]. Results will be written to `scraped_french_books.csv` by default unless `destination_path` is passed  
+]. Logs are printed in `log_file` console. Default is `amazon_scraping.log`  
 
 
 `python3 book_scraping.py -p 20 -d "book_scraping.csv" -l "book_scraping.log`  
