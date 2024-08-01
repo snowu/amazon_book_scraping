@@ -29,10 +29,13 @@ The script is usable with 3 CLI parameters:
 ]. Results will be written to `scraped_french_books.csv` by default unless `destination_path` is passed  
 ]. Logs are printed in `log_file` console. Default is `amazon_scraping.log`  
 
-
+To use the script:  
+`virtualenv -p python3 env_name`  
+`source env_name/bin/activate`  
+`pip install -r requirements.txt`  
 `python3 book_scraping.py -p 20 -d "book_scraping.csv" -l "book_scraping.log`  
 
-all args have defaults so `python3 book_scraping.py` is perfectly fine as well  
+All args have defaults so `python3 book_scraping.py` is fine as well  
 
 I tested up to 1000 pages with additional books info fetched successfully in 340s~ but it's pointless going over 75 (n° of pages on amazon) since the upper limit with the given link is 16*75 = 1200 books.
 
@@ -43,7 +46,7 @@ Essay about scoring can be found in `scoring.txt`
 
 ## Demo of fully async approach
 
-There's also available the version of the approach I would have used if I didn't encounter the problem where as mentioned above, data is incorrect when fetching async jobs.  
+There's also available the version of the approach I would have used if I didn't encounter the problem where - as mentioned above - data is incorrect when fetching async jobs.  
 Full async version is available in `fully_async.py`, usage is identical to `book_scraping.py` 
 
 `python3 fully_async.py -p 20 -d "book_scraping_async.csv" -l "book_scraping_async.log`
