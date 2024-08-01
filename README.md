@@ -13,7 +13,7 @@ For this reason, I ended up using a mixture of sync, asyncio and threading:
 ]. Async to process scraped books and fetch additional details  
 ]. Sync for everything that wouldn't actually profit from being async but it's fast enough to not require threading  
 
-Good news is, this "mixed" approach seems to be both faster and more precise than a fully async approach using ScraperAPI async features. So win win, I suppose.  
+Fully async is generally faster (10-15s~) and I would rather use that but until it's clear *why* data returned is not correct, it's unreliable.
 
 ## Run the script
 Final script is `book_scraping.py`, to protect ScraperAPI key the script uses env variable:   
