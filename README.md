@@ -18,16 +18,16 @@ Good news is, this "mixed" approach seems to be both faster and more precise tha
 ## Run the script
 Final script is `book_scraping.py`.  
 To protect ScraperAPI key the script uses env variable:   
-]. To setup just create `.env` with the API_KEY = "ACTUAL_API_KEY" variable inside. `.env.example` can be used as a template.  
+- To setup just create `.env` with the API_KEY = "ACTUAL_API_KEY" variable inside. `.env.example` can be used as a template.  
 
 The script is usable with 3 CLI parameters:  
 `-d --destination_path`  
 `-p --number_of_pages`  
 `-l --log_file`  
 
-]. Default `number_of_pages` is 20.  
-]. Results will be written to `scraped_french_books.csv` by default unless `destination_path` is passed  
-]. Logs are printed in `log_file` console. Default is `amazon_scraping.log`  
+- Default `number_of_pages` is 20.  
+- Results will be written to `scraped_french_books.csv` by default unless `destination_path` is passed  
+- Logs are printed in `log_file` console. Default is `amazon_scraping.log`  
 
 To use the script:  
 `virtualenv -p python3 env_name`  

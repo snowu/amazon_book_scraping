@@ -5,6 +5,7 @@ import csv
 import logging
 import argparse
 import os
+import time
 from datetime import datetime
 from info_formatter import parse_book_data
 from bs4 import BeautifulSoup
@@ -14,13 +15,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.environ.get("SCRAPER_API_KEY")  
+SCRAPER_API_KEY = os.environ.get("SCRAPER_API_KEY")  
 SCRAPER_AMAZON_URL = "https://api.scraperapi.com/structured/amazon/product"
 SCRAPER_ASYNC_URL = "https://async.scraperapi.com/batchjobs"
 URL_TO_SCRAPE = "https://www.amazon.fr/s?i=stripbooks&bbn=301061&rh=n%3A301139%2Cp_n_publication_date%3A183196031%2Cp_n_feature_browse-bin%3A5272956031%2Cp_n_binding_browse-bin%3A3973586031%7C492480011%7C492481011&s=date-desc-rank&dc"
 
 
-def parse_arguments() -> None:
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog='Scrape books',
         description='Scrape amazon fr pages by new releases and save books to CSV')
@@ -57,7 +58,7 @@ async def get_detailed_book_info(session: aiohttp.ClientSession, asin: str, titl
         "Content-Type": "application/json"
     }
     params = {
-        "api_key": API_KEY,
+        "api_key": SCRAPER_API_KEY,
         "tld": "fr",
         "asin": asin,
     }
@@ -86,7 +87,7 @@ def init_scrapers(number_of_pages: int) -> List[Dict[str, Any]]:
     now = int(datetime.now().timestamp())
 
     params = {
-        "apiKey": API_KEY,
+        "apiKey": SCRAPER_API_KEY,
         "urls": [f"{URL_TO_SCRAPE}&qid={now}&page={page_number}" for page_number in range(1, number_of_pages + 1)],
     }
 
@@ -107,9 +108,12 @@ async def fetch_scraper_job(session: aiohttp.ClientSession, scraper_job: Dict[st
             await asyncio.sleep(1)
 
 
-async def main(csv_file: str, number_of_pages: int):
+async def main(csv_file: str, number_of_pages: int) -> None:
     logging.info(f"Scraping {number_of_pages} pages to {csv_file}...")
+    start_time = time.time()
+
     scraper_jobs = init_scrapers(number_of_pages)
+
     async with aiohttp.ClientSession() as session:
         for i, job in enumerate(scraper_jobs):
             job["page"] = i + 1
@@ -121,9 +125,10 @@ async def main(csv_file: str, number_of_pages: int):
             books = extract_book_info(page["response"]["body"])
             all_books.extend(books)
 
-        logging.info(f"Total books found: {len(all_books)}")
+        logging.info(f"Scraped {number_of_pages} pages and found {len(all_books)} books {time.time() - start_time:.2f} seconds")
 
         results = await asyncio.gather(*[process_book(session, book) for book in all_books])
+        logging.info(f"Fetched additional info for {len(all_books)}: {time.time() - start_time:.2f} seconds")
 
     all_fields = set()
 
@@ -139,6 +144,7 @@ async def main(csv_file: str, number_of_pages: int):
         writer.writeheader()
         writer.writerows(results)
 
+    logging.info(f"Total completion time: {time.time() - start_time:.2f} seconds")
     logging.info(f"Results saved in {csv_file}")
 
 if __name__ == "__main__":
@@ -155,4 +161,7 @@ if __name__ == "__main__":
         ]
     )
 
-    asyncio.run(main(csv_file, number_of_pages))
+    if SCRAPER_API_KEY:
+        asyncio.run(main(csv_file, number_of_pages))
+    else:
+        logging.info("SCRAPER_API_KEY not configured in .env file. cp .env.example .env and change ACTUAL_API_KEY with the correct value")

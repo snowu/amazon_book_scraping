@@ -14,12 +14,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.environ.get("SCRAPER_API_KEY")  
+SCRAPER_API_KEY = os.environ.get("SCRAPER_API_KEY")  
 SCRAPER_AMAZON_URL = "https://api.scraperapi.com/structured/amazon/product"
 BASE_URL = "https://api.scraperapi.com"
 URL_TO_SCRAPE = "https://www.amazon.fr/s?i=stripbooks&bbn=301061&rh=n%3A301139%2Cp_n_publication_date%3A183196031%2Cp_n_feature_browse-bin%3A5272956031%2Cp_n_binding_browse-bin%3A3973586031%7C492480011%7C492481011&s=date-desc-rank&dc"
 
-def parse_arguments() -> None:
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog='Scrape books',
         description='Scrape amazon fr pages by new releases and save books to CSV')
@@ -56,7 +56,7 @@ async def get_detailed_book_info(session: aiohttp.ClientSession, asin: str, titl
         "Content-Type": "application/json"
     }
     params = {
-        "api_key": API_KEY,
+        "api_key": SCRAPER_API_KEY,
         "tld": "fr",
         "asin": asin,
     }
@@ -84,7 +84,7 @@ async def process_book(session: aiohttp.ClientSession, book: Dict[str, str]) -> 
 
 def scrape_amazon_page(page_number):
     params = {
-        'api_key': API_KEY,
+        'api_key': SCRAPER_API_KEY,
         "tld": "fr",
         'url': f'{URL_TO_SCRAPE}&page={page_number}'
     }
@@ -149,4 +149,7 @@ if __name__ == "__main__":
         ]
     )
 
-    asyncio.run(main(csv_file, number_of_pages))
+    if SCRAPER_API_KEY:
+        asyncio.run(main(csv_file, number_of_pages))
+    else:
+        logging.info("SCRAPER_API_KEY not configured in .env file. cp .env.example .env and change ACTUAL_API_KEY with the correct value")
