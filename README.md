@@ -16,8 +16,7 @@ For this reason, I ended up using a mixture of sync, asyncio and threading:
 Good news is, this "mixed" approach seems to be both faster and more precise than a fully async approach using ScraperAPI async features. So win win, I suppose.  
 
 ## Run the script
-Final script is `book_scraping.py`.  
-To protect ScraperAPI key the script uses env variable:   
+Final script is `book_scraping.py`, to protect ScraperAPI key the script uses env variable:   
 - To setup just create `.env` with the API_KEY = "ACTUAL_API_KEY" variable inside. `.env.example` can be used as a template.  
 
 The script is usable with 3 CLI parameters:  
