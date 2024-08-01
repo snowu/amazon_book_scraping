@@ -36,7 +36,8 @@ To use the script:
 
 All args have defaults so `python3 book_scraping.py` is fine as well  
 
-I tested up to 1000 pages with additional books info fetched successfully in 340s~ but it's pointless going over 75 (n° of pages on amazon) since the upper limit with the given link is 16*75 = 1200 books.
+I tested up to 1000 pages with additional books info fetched successfully in 340s~ but it's pointless going over 75 (n° of pages on amazon) since the upper limit with the given link is 16*75 = 1200 books.  
+I thought about limiting this to max 75 pages with a check but I left it open in case you wanted to test performance with a large amount of scraping jobs.
 
 ## Scoring results
 
