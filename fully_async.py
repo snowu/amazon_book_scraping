@@ -25,7 +25,7 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         prog='Scrape books',
         description='Scrape amazon fr pages by new releases and save books to CSV')
-    parser.add_argument('-d', '--destination_path', type=str, default="scraped_french_books.csv")
+    parser.add_argument('-d', '--destination_path', type=str, default="scraped_french_books_async.csv")
     parser.add_argument('-p', '--number_of_pages', type=int, default=20)
     parser.add_argument('-l', '--log_file', type=str, default='amazon_scraping.log')
     return parser.parse_args()

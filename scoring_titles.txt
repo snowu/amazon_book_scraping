@@ -1,0 +1,42 @@
+First off, this was very interesting and mostly new to me. The subject matter is a very interesting challenge and I'm thankful I got the opportunity to learn something new.
+Now I'm curios about toying with these concepts, I'm basically forced by my curiosity to try to implement this anyway over the next few days :)
+
+From what I could gather in my research and reasoning, a "broad-strokes" approach could be:
+
+- Text preprocessing: 
+      - Clean and normalize the text data: strip whitespace and punctuation, remove common stop words (eg. the, and, or, to) and convert to lowercase for consistency in processing. 
+      - Stemming or lemmatization would help the subsequent processing models to better understand context by normalizing the text as much as possible. Lemmatization seems a bit more accurate.
+
+- Feature extraction: 
+    - Use feature extraction techniques like BoW or TF-IDF (BoW for analyze each book separately and TF-IDF to keep track of words across all the results) to convert
+      the text into numbers that represent the weight of words in each entry.
+
+- Processed text:
+    - Based on preprocessing techniques describes above and features extracted, we should be able to predict a score for the text.
+    - Consider other relevant fields like author, title, category or other Metadata:
+        This could be checked against a pre-existing dataset of ours to value based on author usual subjects, their consistency.
+
+- Readability Scores:
+    - Implement Readability metrics (Flesch-Kincaid Grade Level or Gunning Fog Index seem to be the most popular) to assess the complexity of the language used.
+
+- Semantic similarity :
+    - We'll have to run this scoring against a pre-existing set of rules for what we deem "important" so we can use pre-trained word embeddings to find semantic similarity between the query and results.
+    - Thankfully machines don't suffer from Semantic Saturation!
+
+- Machine learning model:
+    - Train a learning-to-rank model using labeled data to combine these features and predict relevance scores.
+    - I wonder - with the recent release of Llama 3.1 open source - how it would perform in this situation, given a chunky training data of already processed and scored books
+
+- Sorting: 
+    - At this point the hardest part is behind us, so we celebrate a job well done, sort by score and print to CSV accordingly
+
+
+Implementation-wise, a list of possibly useful libraries would be:
+  - NLTK or spaCy for text preprocessing.
+  - scikit-learn for feature extraction and traditional machine learning.
+  - Word2Vec, GloVe for word embeddings and sematic similarity.
+  - PyTorch or TensorFlow with the transformers library for more advanced natural language processing tasks.
+  - LambdaMART or RankNet as LTR models, with LightGBM or XGBoost as possible frameworks.
+
+
+It's a pretty gigantic world and I had time to barely scracth the surface, so there are surely other - and possibly better - ways to approach the problem but I think - and hope - this should be exhaustive enough to give a structure to work with.

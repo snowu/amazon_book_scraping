@@ -41,7 +41,7 @@ I thought about limiting this to max 75 pages with a check but I left it open in
 
 ## Scoring results
 
-Essay about scoring can be found in `scoring.txt`  
+Essay about scoring can be found in `scoring_titles.txt`  
 
 
 ## Demo of fully async approach
