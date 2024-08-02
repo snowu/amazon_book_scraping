@@ -9,9 +9,9 @@ what's actually present in the scraped pages.
 Documentation sadly is scarce and despite spending some time testing different setups and options, I wasn't able to fully understand why this happens but I'm assuming it's something to do with how async ScraperAPI jobs are processed.
 
 For this reason, I ended up using a mixture of sync, asyncio and threading:  
-]. Threading to scrape pages concurrently with a sync API endpoint  
-]. Async to process scraped books and fetch additional details  
-]. Sync for everything that wouldn't actually profit from being async but it's fast enough to not require threading  
+- Threading to scrape pages concurrently with a sync API endpoint  
+- Async to process scraped books and fetch additional details  
+- Sync for everything that wouldn't actually profit from being async but it's fast enough to not require threading  
 
 Fully async is generally faster (10-15s~) and I would rather use that but until it's clear *why* data returned is not correct, it's unreliable.
 
