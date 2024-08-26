@@ -96,7 +96,7 @@ def scrape_amazon_page(page_number):
 
 async def main(csv_file, number_of_pages):
     logging.info(f"Scraping {number_of_pages} pages to {csv_file}...")
-    start_time = time.time()
+    init_time = time.time()
 
 
     page_numbers = [i for i in range(1, number_of_pages + 1)]
@@ -112,8 +112,9 @@ async def main(csv_file, number_of_pages):
         for chunk in books:
             all_books.extend(chunk)
 
-    logging.info(f"Scraped {number_of_pages} pages and found {len(all_books)} books {time.time() - start_time:.2f} seconds")
+    logging.info(f"Scraped {number_of_pages} pages and found {len(all_books)} books {time.time() - init_time:.2f} seconds")
 
+    start_time = time.time()
     async with aiohttp.ClientSession() as session:
         results = await asyncio.gather(*[process_book(session, book) for book in all_books])
 
@@ -132,7 +133,7 @@ async def main(csv_file, number_of_pages):
         writer.writeheader()
         writer.writerows(results)
 
-    logging.info(f"Total completion time: {time.time() - start_time:.2f} seconds")
+    logging.info(f"Total completion time: {time.time() - init_time:.2f} seconds")
     logging.info(f"Results saved in {csv_file}")
 
 if __name__ == "__main__":
